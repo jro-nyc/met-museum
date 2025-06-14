@@ -1,0 +1,46 @@
+@use './rws';
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .pagination {
+    width: 100%;
+    span {
+      display: inline-block;
+      padding: 0 5px;
+    }
+  }
+
+  .searchNumber {
+    width: 60px;
+  }
+  .searchString {
+    width: 260px;
+  }
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    flex: 4;
+  }
+
+  .rightByTitle {
+    width: 80%;
+  }
+
+  .leftByTitle {
+    width: 20%;
+  }
+
+  @include rws.for-tablet {
+    width: 100%;
+  }
+
+  @include rws.for-mobile {
+    width: 100%;
+  }
+}

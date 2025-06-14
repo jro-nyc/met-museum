@@ -1,0 +1,26 @@
+$screen-tablet-min: 768px;
+$screen-desktop-min: 1200px;
+$screen-phone-max: $screen-tablet-min - 1;
+$screen-tablet-max: $screen-desktop-min - 1;
+
+@mixin for-mobile {
+  @media (max-width: $screen-phone-max) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @media (min-width: $screen-tablet-min) and (max-width: $screen-tablet-max) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: $screen-desktop-min) {
+    @content;
+  }
+}
+
+@mixin for-widescreen {
+  
+}

@@ -1,33 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import clsx from 'clsx';
+import styles from './App.module.css';
+//import useGetAllValidObjects from './hooks/useGetAllValidObjects'
+import {SearchByTitle} from './components/SearchByTitle';
+import {ValidResponse} from './components/ValidResponse';
+import {PaginatedList} from './components/PaginatedList';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState('');
+    const [showByTitle, setShowByTitle] = useState(false);
+    const tabs = [
+    { id: 'tab1', label: 'Show Pageinated List', content: <PaginatedList /> },
+    { id: 'tab2', label: 'Search By Title', content: <SearchByTitle  title={'picasso'} clearByTitle={()=>setShowByTitle(false)}/> },
+    { id: 'tab3', label: 'Valid Response', content: <ValidResponse id={33}/> },
+  ];
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+  };
+    // const {data} = useGetAllValidObjects();
+    // if(!data) return <div>.......Loading</div>
+    // console.log(data);
+    console.log(showByTitle)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={styles.tabContainer}>
+      {/* Tab Headers */}
+      <div className={styles.tabList}>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={clsx(styles.tab, { [styles.tabActive]: activeTab === tab.id })}
+            onClick={() => handleTabClick(tab.id)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      {/* Tab Content */}
+      <div className={styles.tabContent}>
+        {tabs.find((tab) => tab.id === activeTab)?.content}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </div>
     </>
   )
 }
