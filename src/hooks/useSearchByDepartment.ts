@@ -3,10 +3,10 @@ import axios from 'axios';
 
 function useSearchByDepartment(id){
     const baseURL = 'https://collectionapi.metmuseum.org';
-    const deptURL = `${baseURL}/public/collection/v1/search?departmentId=${id}&q=cat`;
+    const deptIdURL = `${baseURL}/public/collection/v1/search?departmentId=${id}&q=cat`;
     const {data} = useQuery({
-        queryKey:['deptURL'],
-        queryFn:() => axios.get(deptURL)
+        queryKey:['deptIdURL',id],
+        queryFn:() => axios.get(deptIdURL)
     });
     return {data};
 

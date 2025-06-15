@@ -36,8 +36,9 @@ export function PaginatedList() {
   const filteredRange: number[] = data.data.objectIDs.slice((page - 1) * 20, page * 20);
 
   return (
-      <Grid container sx={{ height: '90vh' }}>
-          <Grid component={Paper} elevation={3}>
+    <>
+      <Grid container >
+          {/* <Grid component={Paper} elevation={3}> */}
       <div className={styles.pagination}>
         <span>
             <button onClick={() : void => {
@@ -56,9 +57,10 @@ export function PaginatedList() {
             }
             }}> {page+1}&gt;&gt;&gt;</button></span>
       </div>
-     <Grid className={clsx(styles.layout)}>
-        {!showByTitle && (
-          <Grid className={clsx(styles.layout)}>
+      </Grid>
+     <Grid className={clsx(styles.layout)} sx={{ height: '90vh' }}>
+        {!showByTitle ? (
+          // <Grid className={clsx(styles.layout)}>
             <div className={clsx(styles.left)}>
               {filteredRange.map((x: number) => (
                 <div key={x}>
@@ -68,13 +70,13 @@ export function PaginatedList() {
                 </div>
               ))}
             </div>
-          </Grid>
-        )}
-        {showByTitle || objectId && (
-          <Grid className={clsx(styles.layout)}>
+          // </Grid>
+        ):null}
+        {showByTitle || objectId ? (
+          // <Grid className={clsx(styles.layout)}>
             <div className={clsx(styles.right)}>
               {objectId ? (
-                <ValidResponse id={objectId} 
+                <ValidResponse id={objectId}
                 clearById={() => {}}
                 />
               ) : (
@@ -86,10 +88,11 @@ export function PaginatedList() {
                 </div>
               )}
             </div>
-          </Grid>
-        )}
+          // </Grid>
+        ): <div className={clsx(styles.right)}>&nbsp;</div>}
       </Grid>
-      </Grid>
-      </Grid>
+      {/* // </Grid> */}
+      {/* // </Grid> */}
+      </>
   );
 };

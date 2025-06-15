@@ -1,43 +1,39 @@
-import useSearchByTitle from "../hooks/useSearchByTitle";
+import useGetValidObject from "../hooks/useGetValidObject";
 import {ValidResponse} from  "./ValidResponse";
 import { Grid } from "@mui/system";
 import { clsx } from "clsx";
 import styles from './Met.module.scss';
-import {useState} from 'react';
+//import {useState} from 'react';
 
-interface SearchByTitleProps {
-    title: string;
-    clearByTitle: () => void;
+interface SearchByIdProps {
+    id: number;
 }
 
-export function SearchByTitle({title, clearByTitle}:SearchByTitleProps){
-    const [objectId, setObjectId] = useState<number>(0);
-    const {data} = useSearchByTitle(title);
+export function SearchById({id}:SearchByIdProps){
+    const {data} = useGetValidObject(id);
     if(!data) return <div>2nd.......Loading</div>
     console.log(data);
 
     return (
 <>        
-    <div className={clsx(styles.center)}><h2>Search term was "{title}"</h2></div>
+    <div className={clsx(styles.center)}><h2>Searched ID was "{id}"</h2></div>
       <Grid className={clsx(styles.layout)}>
-
         <div className={clsx(styles.leftByTitle)}>
-        <button onClick={clearByTitle}>Clear By Title</button>
-        {data.data.objectIDs.map((x: number) => (
+        {/* {data.data.objectIDs.map((x: number) => (
           <button
             key={x}
             onClick={() => setObjectId(x)}
           >
             Show object {x}
           </button>
-        ))}
+        ))} */}
       </div>
       <div className={clsx(styles.rightByTitle)}>
-        {objectId ? (
+        {id ? (
           <div>
             {/* <button onClick={clearByTitle}>Clear By Title</button>
             &nbsp;&nbsp;&nbsp;&nbsp; */}
-            <ValidResponse id={objectId} clearById={()=>{}}/>
+            <ValidResponse id={id} clearById={()=>{}}/>
           </div>
         ) : null}
       </div>

@@ -1,5 +1,5 @@
 import useGetValidObject from "../hooks/useGetValidObject";
-
+import DisplayKeyValue from "../components/DispalyKeyValue"
 interface ValidResponseProps {
   id: number;
   clearById: () => void;
@@ -11,8 +11,9 @@ export function ValidResponse({ id }: ValidResponseProps) {
   if (!data) return <div>No data</div>;
 
   return (
-    <div>
-      <p>{JSON.stringify(data)}</p>
-    </div>
+    <>
+      {/* <p>{JSON.stringify(data)}</p> */}
+      <DisplayKeyValue data={data.data} />
+    </>
   );
 }

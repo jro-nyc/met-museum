@@ -4,11 +4,11 @@ import clsx from 'clsx';
 import styles from './App.module.css';
 //import useGetAllValidObjects from './hooks/useGetAllValidObjects'
 import {SearchByTitle} from './components/SearchByTitle';
-import {ValidResponse} from './components/ValidResponse';
+import {SearchById} from './components/SearchById';
 import {PaginatedList} from './components/PaginatedList';
 import {SearchByDepartment} from './components/SearchByDepartment';
 import Modal from './components/Modal';
-import { Grid, List, ListItem, ListItemText, Paper, Typography, Box } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 
 function App() {
   const [activeTab, setActiveTab] = useState<string>('tab1');
@@ -22,8 +22,9 @@ function App() {
   const tabs = [
     { id: 'tab1', label: 'Show Paginated List', content: <PaginatedList /> },
     { id: 'tab2', label: 'Search By Title', content: <SearchByTitle  title={newTitle} clearByTitle={()=>setShowByTitle(false)}/> },
-    { id: 'tab3', label: 'Search By Id', content: <ValidResponse id={newId} clearById={()=>setShowById(false)}/> },
-    { id: 'tab4', label: 'Search By Department', content: <SearchByDepartment department={newId} clearByDept={()=>setShowById(false)}/> },
+    // { id: 'tab3', label: 'Search By Id', content: <ValidResponse id={newId} clearById={()=>setShowById(false)}/> },
+    { id: 'tab3', label: 'Search By Id', content: <SearchById id={newId} /> },
+    { id: 'tab4', label: 'Search By Department', content: <SearchByDepartment department={newId} clearByDept={()=>setShowById(false)} title={''}/> },
   ];
   const handleTabClick = (tabId: string) => {
     if(tabId === "tab2") {

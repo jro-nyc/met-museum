@@ -42,7 +42,7 @@ export const validObjectResponseSchema = z.object({
   artistNationality: z.string(),
   artistBeginDate: z.string(),
   artistEndDate: z.string(),
-artistGender: z.string(),
+  artistGender: z.string(),
   artistWikidata_URL: z.string(),
   artistULAN_URL: z.string(),
   objectDate: z.string(),
