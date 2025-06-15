@@ -2,6 +2,7 @@ import useGetValidObject from "../hooks/useGetValidObject";
 
 interface ValidResponseProps {
   id: number;
+  clearById: () => void;
 }
 
 export function ValidResponse({ id }: ValidResponseProps) {

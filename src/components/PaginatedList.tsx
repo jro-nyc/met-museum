@@ -52,9 +52,8 @@ export function PaginatedList() {
   const filteredRange: number[] = data.data.objectIDs.slice((page - 1) * 20, page * 20);
 
   return (
-    <Grid alignItems="stretch" container hasVerticalSpacing>
-     <Grid columnSpan={{ md: 12 }} className={clsx(styles.layout)}>
-          <div className={styles.pagination}>
+    <Grid alignItems="stretch">
+                  <div className={styles.pagination}>
             <span>
                 <button onClick={() : void => {
                 if (page > 1) {
@@ -71,7 +70,7 @@ export function PaginatedList() {
                     setObjectId(0);
                 }
                 }}> {page+1}&gt;&gt;&gt;</button></span>
-                <span>Search object by ID:<input className={styles.searchNumber} type="number" onChange={(e) : void => {
+                {/* <span>Search object by ID:<input className={styles.searchNumber} type="number" onChange={(e) : void => {
                 const val : number = parseInt(e.target.value);
                 if (!isNaN(val) && val > 0 && val <= data.data.objectIDs.length) {
                     searchObjectId.current = val;
@@ -96,8 +95,10 @@ export function PaginatedList() {
                     inputRef.current.value = '';
                 }
                 }}} disabled={!showByTitle}>Go</button>
-                </span>
+                </span> */}
           </div>
+     <Grid className={clsx(styles.layout)}>
+
         </Grid>
         {!showByTitle && (
           <Grid className={clsx(styles.layout)}>
@@ -112,11 +113,13 @@ export function PaginatedList() {
             </div>
           </Grid>
         )}
-        {showByTitle && (
+        {showByTitle || objectId && (
           <Grid className={clsx(styles.layout)}>
             <div className={clsx(styles.right)}>
               {objectId ? (
-                <ValidResponse id={objectId} />
+                <ValidResponse id={objectId} 
+                clearById={() => {}}
+                />
               ) : (
                 <div>
                   <SearchByTitle

@@ -1,19 +1,19 @@
-import useSearchByTitle from "../hooks/useSearchByTitle";
+import useSearchByDepartment from "../hooks/useSearchByDepartment";
 import {ValidResponse} from  "./ValidResponse";
 import { Grid } from "@mui/system";
 import { clsx } from "clsx";
 import styles from './Met.module.scss';
 import {useState} from 'react';
 
-interface SearchByTitleProps {
+interface SearchByDepartmentProps {
     title: string;
     clearByTitle: () => void;
 }
 
-export function SearchByTitle({title, clearByTitle}:SearchByTitleProps){
+export function SearchByDepartment({title, clearByTitle}:SearchByDepartmentProps){
     const [objectId, setObjectId] = useState<number>(0);
-    const {data} = useSearchByTitle(title);
-    if(!data) return <div>2nd.......Loading</div>
+    const {data} = useSearchByDepartment(title);
+    if(!data) return <div>4th.......Loading</div>
     console.log(data);
     // if(typeof data.objectIDs === "undefined"){
     //     throw new Error('blah')
@@ -26,12 +26,12 @@ export function SearchByTitle({title, clearByTitle}:SearchByTitleProps){
       <Grid className={clsx(styles.layout)}>
         <div className={clsx(styles.leftByTitle)}>
         <button onClick={clearByTitle}>Clear By Title</button>
-        {data.data.objectIDs.map((x: number) => (
+        {data.data.departments.map((x) => (
           <button
-            key={x}
+            key={x.departmentId}
             onClick={() => setObjectId(x)}
           >
-            Show object {x}
+            {x.departmentId}- {x.displayName}
           </button>
         ))}
       </div>
