@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-function useSearchByDepartment(id){
+function useGetAllDepartments(){
     const baseURL = 'https://collectionapi.metmuseum.org';
-    const deptURL = `${baseURL}/public/collection/v1/search?departmentId=${id}&q=cat`;
+    const deptURL = `${baseURL}/public/collection/v1/departments `;
     const {data} = useQuery({
         queryKey:['deptURL'],
         queryFn:() => axios.get(deptURL)
@@ -11,5 +11,5 @@ function useSearchByDepartment(id){
     return {data};
 
 }
-export default useSearchByDepartment;
+export default useGetAllDepartments;
 

@@ -1,20 +1,4 @@
-// import useGetAllValidObjects from "../hooks/useGetAllValidObjects";
 
-// export function PaginatedList( ){
-//     const {data} = useGetAllValidObjects();
-//     if(!data) return <div>1st.......Loading</div>
-//     console.log(data);
-
-//   if (!data) return <div>No data</div>;
-
-//   return (
-//     <div>
-//       <p>{JSON.stringify(data)}</p>
-//     </div>
-//   );
-// }
-
-//import { clsx } from 'clsx';
 import useGetAllValidObjects from "../hooks/useGetAllValidObjects";
 import {
   useEffect,
@@ -22,7 +6,7 @@ import {
   useState
 } from "react";
 //import { Grid } from "@mui/web-ui-grid";
-import { Grid } from "@mui/system";
+import { Grid , Paper} from  '@mui/material';
 import { clsx } from "clsx";
 import { ValidResponse } from "./ValidResponse";
 import { SearchByTitle } from "./SearchByTitle";
@@ -52,54 +36,27 @@ export function PaginatedList() {
   const filteredRange: number[] = data.data.objectIDs.slice((page - 1) * 20, page * 20);
 
   return (
-    <Grid alignItems="stretch">
-                  <div className={styles.pagination}>
-            <span>
-                <button onClick={() : void => {
-                if (page > 1) {
-                    setPage(page - 1);
-                    setObjectId(0);
-                }
-                }}>&lt;&lt;&lt; {page-1}</button>
-                </span>
-                <span>Page: {page}</span>
-                <span><button
-                onClick={() : void => {
-                if (page < Math.ceil(data.data.objectIDs.length / 20)) {
-                    setPage(page + 1);
-                    setObjectId(0);
-                }
-                }}> {page+1}&gt;&gt;&gt;</button></span>
-                {/* <span>Search object by ID:<input className={styles.searchNumber} type="number" onChange={(e) : void => {
-                const val : number = parseInt(e.target.value);
-                if (!isNaN(val) && val > 0 && val <= data.data.objectIDs.length) {
-                    searchObjectId.current = val;
-                }
-                }} ref={inputRef}/><button onClick={() : void => {
-                if (searchObjectId.current) {
-                    setObjectId(searchObjectId.current);
-                    searchObjectId.current = 0;
-                }
-                if (inputRef.current) {
-                    inputRef.current.value = '';
-                }
-                }}>Go</button>
-                </span>
-                <span>Search object by Title:<input className={styles.searchString} type="string" onChange={(e) => {
-                searchObjectTitle.current = e.target.value;
-                }} ref={inputRef2}/>
-                <button onClick={() => {
-                if (searchObjectTitle.current) {
-                    setShowByTitle(true);
-                    if (inputRef.current) {
-                    inputRef.current.value = '';
-                }
-                }}} disabled={!showByTitle}>Go</button>
-                </span> */}
-          </div>
+      <Grid container sx={{ height: '90vh' }}>
+          <Grid component={Paper} elevation={3}>
+      <div className={styles.pagination}>
+        <span>
+            <button onClick={() : void => {
+            if (page > 1) {
+                setPage(page - 1);
+                setObjectId(0);
+            }
+            }}>&lt;&lt;&lt; {page-1}</button>
+            </span>
+            <span>Page: {page}</span>
+            <span><button
+            onClick={() : void => {
+            if (page < Math.ceil(data.data.objectIDs.length / 20)) {
+                setPage(page + 1);
+                setObjectId(0);
+            }
+            }}> {page+1}&gt;&gt;&gt;</button></span>
+      </div>
      <Grid className={clsx(styles.layout)}>
-
-        </Grid>
         {!showByTitle && (
           <Grid className={clsx(styles.layout)}>
             <div className={clsx(styles.left)}>
@@ -131,6 +88,8 @@ export function PaginatedList() {
             </div>
           </Grid>
         )}
+      </Grid>
+      </Grid>
       </Grid>
   );
 };

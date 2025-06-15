@@ -7,14 +7,15 @@ import {useState} from 'react';
 
 interface SearchByDepartmentProps {
     title: string;
+    department: number;
     clearByTitle: () => void;
 }
 
-export function SearchByDepartment({title, clearByTitle}:SearchByDepartmentProps){
+export function SearchByDepartment({title, department, clearByTitle}:SearchByDepartmentProps){
     const [objectId, setObjectId] = useState<number>(0);
-    const {data} = useSearchByDepartment(title);
+    const {data} = useSearchByDepartment(department);
     if(!data) return <div>4th.......Loading</div>
-    console.log(data);
+    console.log(data,title);
     // if(typeof data.objectIDs === "undefined"){
     //     throw new Error('blah')
     // }

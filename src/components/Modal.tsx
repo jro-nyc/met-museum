@@ -1,6 +1,7 @@
 import React, { useState, type FormEvent } from 'react';
 import clsx from 'clsx';
 import styles from './Modal.module.scss';
+import DepartmentList from '../components/DepartmentList'
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,8 +21,13 @@ function Modal  ({ isOpen, type, onClose, onSubmit }:ModalProps){
             setTitle('');
             onClose();
         }
-    } else if( title){
+    } else if(type === "number" && title){
         onSubmit(parseInt(title));
+        setTitle('');
+        onClose();
+    } else if(type === "select"){
+      const optionSelected = e.currentTarget[0].value;
+        onSubmit(parseInt(optionSelected));
         setTitle('');
         onClose();
     }
@@ -36,6 +42,7 @@ function Modal  ({ isOpen, type, onClose, onSubmit }:ModalProps){
       <div className={clsx(styles.modal)}>
         <h2>{type === "string" ? "Enter Title":"Enter ID"}</h2>
         <form onSubmit={handleSubmit}>
+          {type ==="select" ? <DepartmentList /> : (
           <input
             type={type === "string" ? "text":"number"}
             value={title}
@@ -43,6 +50,7 @@ function Modal  ({ isOpen, type, onClose, onSubmit }:ModalProps){
             placeholder={type === "string" ? "Enter a title":"Enter an ID"}
             className={clsx(styles.modalInput)}
           />
+          )}
           <div className="modal-buttons">
             <button type="submit" className={clsx(styles.modalButton)}>
               Submit 
