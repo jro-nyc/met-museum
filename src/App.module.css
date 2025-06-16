@@ -8,6 +8,9 @@
 .tabList {
   display: flex;
   border-bottom: 2px solid #ddd;
+  button{
+    border:1px solid #063;
+  }
 }
 
 .tab {
@@ -20,7 +23,7 @@
 }
 
 .tabActive {
-  background-color: #fff;
+  background-color: rgb(132, 135, 179);
   border-bottom: 2px solid #007bff;
   font-weight: bold;
 }

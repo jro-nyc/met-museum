@@ -1,44 +1,28 @@
 
 import useGetAllValidObjects from "../hooks/useGetAllValidObjects";
 import {
-  useEffect,
-  useRef,
   useState
 } from "react";
 //import { Grid } from "@mui/web-ui-grid";
-import { Grid , Paper} from  '@mui/material';
+import { Grid } from  '@mui/material';
 import { clsx } from "clsx";
 import { ValidResponse } from "./ValidResponse";
-import { SearchByTitle } from "./SearchByTitle";
 import styles from './Met.module.scss';
 
 export function PaginatedList() {
   const [objectId, setObjectId] = useState<number>(0);
-  const [showByTitle, setShowByTitle] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-  const searchObjectId = useRef<number>(0);
-  const searchObjectTitle = useRef<string>("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const inputRef2 = useRef<HTMLInputElement>(null);
+  const {data} = useGetAllValidObjects();
 
-  const { data} = useGetAllValidObjects();
 
-  useEffect(() => {
-    console.log("useEffect: " + objectId + ": sbt " + showByTitle);
-  }, [objectId, showByTitle]);
+  if (!data) return <div>...Loading</div>;
 
-  if (!data) return <div>No data</div>;
-
-  console.log(data); // this will print the data in the console
-  if(!data){
-  throw new Error;
-  }
+  console.log(data);
   const filteredRange: number[] = data.data.objectIDs.slice((page - 1) * 20, page * 20);
 
   return (
     <>
       <Grid container >
-          {/* <Grid component={Paper} elevation={3}> */}
       <div className={styles.pagination}>
         <span>
             <button onClick={() : void => {
@@ -59,40 +43,23 @@ export function PaginatedList() {
       </div>
       </Grid>
      <Grid className={clsx(styles.layout)} sx={{ height: '90vh' }}>
-        {!showByTitle ? (
-          // <Grid className={clsx(styles.layout)}>
-            <div className={clsx(styles.left)}>
-              {filteredRange.map((x: number) => (
-                <div key={x}>
-                  <span>
-                    <button onClick={() => setObjectId(x)}>Show object {x}</button>
-                  </span>
-                </div>
-              ))}
+        <div className={clsx(styles.left)}>
+          {filteredRange.map((x: number) => (
+            <div key={x}>
+              <span>
+                <button onClick={() => setObjectId(x)}>Show object {x}</button>
+              </span>
             </div>
-          // </Grid>
-        ):null}
-        {showByTitle || objectId ? (
-          // <Grid className={clsx(styles.layout)}>
+          ))}
+        </div>
+        {objectId ? (
             <div className={clsx(styles.right)}>
               {objectId ? (
-                <ValidResponse id={objectId}
-                clearById={() => {}}
-                />
-              ) : (
-                <div>
-                  <SearchByTitle
-                    title={searchObjectTitle.current}
-                    clearByTitle={() => setShowByTitle(false)}
-                  />
-                </div>
-              )}
+                <ValidResponse id={objectId} />
+              ) :null}
             </div>
-          // </Grid>
         ): <div className={clsx(styles.right)}>&nbsp;</div>}
       </Grid>
-      {/* // </Grid> */}
-      {/* // </Grid> */}
-      </>
+    </>
   );
 };

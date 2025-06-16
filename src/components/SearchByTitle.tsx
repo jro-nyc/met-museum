@@ -7,22 +7,29 @@ import {useState} from 'react';
 
 interface SearchByTitleProps {
     title: string;
-    clearByTitle: () => void;
 }
 
-export function SearchByTitle({title, clearByTitle}:SearchByTitleProps){
+export function SearchByTitle({title}:SearchByTitleProps){
     const [objectId, setObjectId] = useState<number>(0);
     const {data} = useSearchByTitle(title);
     if(!data) return <div>2nd.......Loading</div>
-    console.log(data);
+    //console.log(data);
+
+    if(!data.data.objectIDs){
+      return (
+        <div className={clsx(styles.center)}>
+          <h2>Search term was "{title}" has not matches</h2>
+        </div>
+      )
+    }
 
     return (
-<>        
-    <div className={clsx(styles.center)}><h2>Search term was "{title}"</h2></div>
+    <>
+      <div className={clsx(styles.center)}>
+        <h2>Search term was "{title}"</h2>
+      </div>
       <Grid className={clsx(styles.layout)}>
-
         <div className={clsx(styles.leftByTitle)}>
-        <button onClick={clearByTitle}>Clear By Title</button>
         {data.data.objectIDs.map((x: number) => (
           <button
             key={x}
@@ -35,9 +42,7 @@ export function SearchByTitle({title, clearByTitle}:SearchByTitleProps){
       <div className={clsx(styles.rightByTitle)}>
         {objectId ? (
           <div>
-            {/* <button onClick={clearByTitle}>Clear By Title</button>
-            &nbsp;&nbsp;&nbsp;&nbsp; */}
-            <ValidResponse id={objectId} clearById={()=>{}}/>
+            <ValidResponse id={objectId}/>
           </div>
         ) : null}
       </div>

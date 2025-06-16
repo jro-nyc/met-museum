@@ -12,19 +12,17 @@ import { Grid, Box } from '@mui/material';
 
 function App() {
   const [activeTab, setActiveTab] = useState<string>('tab1');
-  const [showByTitle, setShowByTitle] = useState<boolean>(false);
-  const [showById, setShowById] = useState<boolean>(false);
   const [titleModalOpen, setTitleModalOpen] = useState<boolean>(false);
   const [newTitle, setNewTitle]= useState<string>('');
   const [idModalOpen, setIdModalOpen] = useState<boolean>(false);
-    const [deptModalOpen, setDeptModalOpen] = useState<boolean>(false);
+  const [deptModalOpen, setDeptModalOpen] = useState<boolean>(false);
   const [newId, setNewId]= useState<number>(0);
+
   const tabs = [
     { id: 'tab1', label: 'Show Paginated List', content: <PaginatedList /> },
-    { id: 'tab2', label: 'Search By Title', content: <SearchByTitle  title={newTitle} clearByTitle={()=>setShowByTitle(false)}/> },
-    // { id: 'tab3', label: 'Search By Id', content: <ValidResponse id={newId} clearById={()=>setShowById(false)}/> },
+    { id: 'tab2', label: 'Search By Title', content: <SearchByTitle  title={newTitle}/> },
     { id: 'tab3', label: 'Search By Id', content: <SearchById id={newId} /> },
-    { id: 'tab4', label: 'Search By Department', content: <SearchByDepartment department={newId} clearByDept={()=>setShowById(false)} title={''}/> },
+    { id: 'tab4', label: 'Search By Department', content: <SearchByDepartment department={newId} /> },
   ];
   const handleTabClick = (tabId: string) => {
     if(tabId === "tab2") {
@@ -39,15 +37,10 @@ function App() {
       setActiveTab(tabId);
     }
   };
-    // const {data} = useGetAllValidObjects();
-    // if(!data) return <div>.......Loading</div>
-    // console.log(data);
-    console.log(showByTitle, showById)
+  //console.log(showByTitle, showById)
 
   return (
     <Box sx={{ height: '100vh', overflow: 'hidden' }}>
-    {/* <div className={styles.tabContainer}> */}
-      {/* Tab Headers */}
       <div className={styles.tabList}>
         {tabs.map((tab) => (
           <button
@@ -60,13 +53,9 @@ function App() {
         ))}
       </div>
 
-      {/* Tab Content */}
-      {/* <div className={styles.tabContent}> */}
-        <Grid container sx={{ height: '100%' }}>
+      <Grid container sx={{ height: '100%' }}>
         {tabs.find((tab) => tab.id === activeTab)?.content}
-        </Grid>
-      {/* </div> */}
-    {/* </div> */}
+      </Grid>
       <Modal
         isOpen={titleModalOpen}
         onClose={()=>setTitleModalOpen(false)}

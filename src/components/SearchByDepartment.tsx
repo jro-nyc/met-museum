@@ -7,23 +7,16 @@ import styles from './Met.module.scss';
 import {useState} from 'react';
 
 interface SearchByDepartmentProps {
-    title: string;
     department: number;
-    clearByDept: () => void;
 }
 
-export function SearchByDepartment({title, department, clearByDept}:SearchByDepartmentProps){
+export function SearchByDepartment({department}:SearchByDepartmentProps){
     const [objectId, setObjectId] = useState<number>(0);
     const {data} = useSearchByDepartment(department);
     if(!data) return <div>4th.......Loading</div>
-    console.log(data,title);
-    // if(typeof data.objectIDs === "undefined"){
-    //     throw new Error('blah')
-    // }
-    // const dataObjects = data.objectIDs || [];
-    //const dataObjects = [1,2,3];
-    //const page = 1;
-    const filteredDepartments: number[] = data.data.objectIDs || [];//.slice((page - 1) * 20, page * 20);
+    console.log(data);
+
+    const filteredDepartments: number[] = data.data.objectIDs || [];
 
     return (
 <>
@@ -39,12 +32,9 @@ export function SearchByDepartment({title, department, clearByDept}:SearchByDepa
               ))}
       </div>
       <div className={clsx(styles.rightByTitle)}>
-                {/* <h2>{title}</h2> */}
         {objectId ? (
           <div>
-            {/* <button onClick={clearByDept}>In {title} with id={objectId}</button>
-            &nbsp;&nbsp;&nbsp;&nbsp; */}
-            <ValidResponse id={objectId} clearById={()=>{}}/>
+            <ValidResponse id={objectId} />
           </div>
         ) : null}
       </div>

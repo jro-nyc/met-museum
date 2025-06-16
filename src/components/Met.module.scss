@@ -1,11 +1,16 @@
 @use './rws';
-  .center{text-align: center;width:100%}
+
+  .center{
+    text-align: center;
+    width:100%
+  }
 .layout {
   display: flex;
   flex-direction: row;
   width: 100%;
-
-
+  button{
+    white-space: nowrap;
+  }
 
   .pagination {
     width: 100%;
@@ -31,7 +36,7 @@
   }
 
   .rightByTitle {
-    width: 75vw;
+    width: 55vw;
   }
 
   .leftByTitle {
