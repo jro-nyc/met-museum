@@ -4,10 +4,15 @@ initial command was:
 >npm create vite@latest met-museum -- --template react-ts
 
 Then I installed things I am familiar with my work at JPMC
+
 -zod for Schemas
+
 -react-query for the API calls
+
 -clsx for doing styles
+
 -Material UI Grid is from my previous job, the library I use
+
  for Grid and Flex is proprietary to JPMC
 
 >npm install zod @tanstack/react-query clsx @mui/material @emotion/react @emotion/styled
@@ -15,12 +20,15 @@ Then I installed things I am familiar with my work at JPMC
 For the styled CSS in DEV I installed
 >npm install -D sass-embedded
 
-to run:
-clone the repository:
->git clone https://github.com/jro-nyc/met-museum.git
+to run, clone the repository, go to the directory, install all the packages, build the server, run the server:
+>git clone https://github.com/jro-nyc/met-museum.
+
 >cd met-museum
+
 >npm install
+
 >npn run build
+
 >npm run dev
 
 Server loads on: http://localhost:5173/
