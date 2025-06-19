@@ -16,8 +16,14 @@ For the styled CSS in DEV I installed
 >npm install -D sass-embedded
 
 to run:
+clone the repository:
+>git clone https://github.com/jro-nyc/met-museum.git
+>cd met-museum
+>npm install
 >npn run build
 >npm run dev
+
+Server loads on: http://localhost:5173/
 
 06/19 - yes realized I had not run npm run build so went back and fixed my Typerscript errors
 
