@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const allDepartmentsSchema = z.object({
+  departments: z.array(
+    z.object({
+      departmentId: z.number(),
+      displayName: z.string()
+    }))
+  });
+
+export type AllDepartments = z.infer<typeof allDepartmentsSchema>;
+
 export const allDataResponseSchema = z.object({
   total: z.number(),
   objectIDs: z.array(z.number()),

@@ -4,16 +4,22 @@ initial command was:
 >npm create vite@latest met-museum -- --template react-ts
 
 Then I installed things I am familiar with my work at JPMC
--zod for Schemas (if needed, which it turns out I didn't)
+-zod for Schemas
 -react-query for the API calls
 -clsx for doing styles
 -Material UI Grid is from my previous job, the library I use
  for Grid and Flex is proprietary to JPMC
 
->npm install zod @tanstack/react-query clsx @mui/material
+>npm install zod @tanstack/react-query clsx @mui/material @emotion/react @emotion/styled
 
 For the styled CSS in DEV I installed
 >npm install -D sass-embedded
+
+to run:
+>npn run build
+>npm run dev
+
+06/19 - yes realized I had not run npm run build so went back and fixed my Typerscript errors
 
 For the API fetches in my hooks, I also needed to add Axios (I forgot that we have a custom fetch library at work
  that works with React-query)

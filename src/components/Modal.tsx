@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from 'react';
+import  { useState, type FormEvent } from 'react';
 import clsx from 'clsx';
 import styles from './Modal.module.scss';
 import DepartmentList from '../components/DepartmentList'
@@ -26,10 +26,11 @@ function Modal  ({ isOpen, type, onClose, onSubmit }:ModalProps){
         setTitle('');
         onClose();
     } else if(type === "select"){
-      const optionSelected = e.currentTarget[0].value;
-        onSubmit(parseInt(optionSelected));
-        setTitle('');
-        onClose();
+      const select = e.currentTarget.querySelector('select');
+      const optionSelected = select ? select.value : '';
+      onSubmit(parseInt(optionSelected));
+      setTitle('');
+      onClose();
     }
   };
 
@@ -40,7 +41,7 @@ function Modal  ({ isOpen, type, onClose, onSubmit }:ModalProps){
   return (
     <div className={clsx(styles.modalOverlay)}>
       <div className={clsx(styles.modal)}>
-        <h2>{type === "string" ? "Enter Title":"Enter ID"}</h2>
+        <h2>{type === "string" ? "Enter Title":type === "select"? "Select a Department" : "Enter ID"}</h2>
         <form onSubmit={handleSubmit}>
           {type ==="select" ? <DepartmentList /> : (
           <input

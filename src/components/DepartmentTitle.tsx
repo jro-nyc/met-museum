@@ -8,12 +8,24 @@ interface DepartmentTitleProps {
 
 export default function DepartmentTitle({id}:DepartmentTitleProps) {
 
-  const { data } = useGetAllDepartments();
+  interface Department {
+    departmentId: number;
+    displayName: string;
+  }
+
+  interface DepartmentsResponse {
+    data: {
+      departments: Department[];
+    };
+  }
+
+  const { data }: { data?: DepartmentsResponse } = useGetAllDepartments();
 
   if (!data) return <div>No data</div>;
-  const title = data.data.departments.find(x=>x.departmentId===id);
+
+  const title: Department | undefined = data.data.departments.find((x: Department) => x.departmentId === id);
 
   return (
-    <div className={clsx(styles.center)}><h2>Search term was "{title.displayName}"</h2></div>
+    <div className={clsx(styles.center)}><h2>Search term was "{title?.displayName ?? "Unknown"}"</h2></div>
   );
 }

@@ -2,7 +2,11 @@
 import clsx from 'clsx';
 import styles from './DisplayKeyValue.module.scss';
 
-export default function DisplayKeyValue({ data }) {
+type DisplayKeyValueProps = {
+    data: Record<string, unknown>;
+};
+
+export default function DisplayKeyValue({ data }: DisplayKeyValueProps) {
     const rows = Object.entries(data).map(([key, value]) => ({ key, value:JSON.stringify(value) }));
     console.log(rows);
     return (

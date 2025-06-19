@@ -1,6 +1,6 @@
 import useSearchByTitle from "../hooks/useSearchByTitle";
 import {ValidResponse} from  "./ValidResponse";
-import { Grid } from "@mui/system";
+import { Grid } from "@mui/material";
 import { clsx } from "clsx";
 import styles from './Met.module.scss';
 import {useState} from 'react';
